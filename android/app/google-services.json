@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "350330971043",
+    "project_id": "pacific-arcadia-350102",
+    "storage_bucket": "pacific-arcadia-350102.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350330971043:android:cecc73c2f59da5fcbf3016",
+        "android_client_info": {
+          "package_name": "com.sempatpanick.e_warung"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350330971043-jgu9tbn895dkliejnjh0epa2p7gqv5j3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfbcpSBfa9cPl_9eDKSRaVB3Pl53O3_ng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350330971043-jgu9tbn895dkliejnjh0epa2p7gqv5j3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "350330971043-mn69piaivdqp3sip4ad19o9j9nqcci18.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.sempatpanick.eWarung"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
