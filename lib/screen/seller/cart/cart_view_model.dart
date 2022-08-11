@@ -23,9 +23,9 @@ class CartViewModel extends ChangeNotifier {
   ResultState _stateTransaction = ResultState.none;
   ResultState get stateTransaction => _stateTransaction;
 
-  final List<String> _cartBarcode = ["Nasi GOreng"];
-  final List<int> _amountProduct = [1];
-  final List<int> _totalPrice = [10000];
+  final List<String> _cartBarcode = [];
+  final List<int> _amountProduct = [];
+  final List<int> _totalPrice = [];
 
   List<String> get resultBarcode => _cartBarcode;
   List<int> get amountProduct => _amountProduct;

@@ -97,15 +97,6 @@ class _CartBuyerScreenState extends State<MainBuyerScreen> with SingleTickerProv
       }
     });
 
-    // FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-    //   if (message != null) {
-    //     final User userLogin = authViewModel.userLogin;
-    //     if (userLogin.id.isNotEmpty) {
-    //       if (message.data['redirect'] == 'order_status') {}
-    //     }
-    //   }
-    // });
-
     //on background (not terminated)
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       final User userLogin = authViewModel.userLogin;
