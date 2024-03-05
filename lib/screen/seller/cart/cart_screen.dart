@@ -37,7 +37,8 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
     showDialog(
         context: context,
         builder: (context) {
-          final CartViewModel cartViewModel = Provider.of<CartViewModel>(context, listen: false);
+          final CartViewModel cartViewModel =
+              Provider.of<CartViewModel>(context, listen: false);
 
           return Form(
             key: _formKey,
@@ -46,7 +47,9 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
                   child: Text(
                     "Checkout",
                     style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                        color: textColorBlue, fontSize: 16.0, fontWeight: FontWeight.bold),
+                        color: textColorBlue,
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
                 content: Column(
@@ -54,8 +57,8 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
                   children: [
                     TextFormField(
                       controller: _textPaidController,
-                      decoration:
-                          const InputDecoration(labelText: "Money", border: OutlineInputBorder()),
+                      decoration: const InputDecoration(
+                          labelText: "Money", border: OutlineInputBorder()),
                       keyboardType: TextInputType.number,
                       validator: (value) {
                         if (int.parse(value!) < cartViewModel.totalPrice.sum) {
@@ -86,10 +89,12 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
 
   void transaction() async {
     try {
-      final HomeViewModel homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+      final HomeViewModel homeViewModel =
+          Provider.of<HomeViewModel>(context, listen: false);
       final ProductViewModel productViewModel =
           Provider.of<ProductViewModel>(context, listen: false);
-      final CartViewModel cartViewModel = Provider.of<CartViewModel>(context, listen: false);
+      final CartViewModel cartViewModel =
+          Provider.of<CartViewModel>(context, listen: false);
       final HistoryTransactionViewModel historyTransactionViewModel =
           Provider.of<HistoryTransactionViewModel>(context, listen: false);
 
@@ -98,7 +103,8 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
       List<Map<String, dynamic>> listProduct = [];
 
       cartViewModel.resultBarcode.asMap().forEach((index, element) {
-        var dataProduct = productViewModel.products.where((product) => product.idProduk == element);
+        var dataProduct = productViewModel.products
+            .where((product) => product.idProduk == element);
         listProduct.add(ProductTransaction(
                 idProduct: element,
                 amount: cartViewModel.amountProduct[index],
@@ -135,7 +141,8 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
   @override
   void didChangeDependencies() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      final CartViewModel cartViewModel = Provider.of<CartViewModel>(context, listen: false);
+      final CartViewModel cartViewModel =
+          Provider.of<CartViewModel>(context, listen: false);
 
       if (cartViewModel.indexTab != 0) {
         _tabController.animateTo(cartViewModel.indexTab);
@@ -205,8 +212,8 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
                           itemCount: modelCart.resultBarcode.length,
                           itemBuilder: (context, index) {
                             var id = modelCart.resultBarcode[index];
-                            var dataProduct =
-                                modelProduct.products.where((element) => element.idProduk == id);
+                            var dataProduct = modelProduct.products
+                                .where((element) => element.idProduk == id);
                             if (dataProduct.isNotEmpty) {
                               final Products product = Products(
                                   id: dataProduct.first.id,
@@ -224,7 +231,8 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
                                       child: Center(
                                         child: CircularProgressIndicator(),
                                       ))
-                                  : CustomItemCart(index: index, product: product);
+                                  : CustomItemCart(
+                                      index: index, product: product);
                             } else {
                               return const SizedBox();
                             }
@@ -241,50 +249,60 @@ class _CartScreenState extends State<CartScreen> with TickerProviderStateMixin {
                               children: [
                                 AutoSizeText(
                                   "Total",
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: primaryColor,
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
+                                          color: primaryColor,
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold),
                                 ),
                                 AutoSizeText(
                                   "Rp. ${GetFormatted.number(modelCart.totalPrice.sum)}",
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                      color: colorBlack,
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold),
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
+                                          color: colorBlack,
+                                          fontSize: 20.0,
+                                          fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                             ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 20.0),
-                                primary: primaryColor,
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 8.0, horizontal: 20.0),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
                               onPressed: modelCart.resultBarcode.isEmpty
                                   ? null
-                                  : modelCart.stateTransaction == ResultState.loading
+                                  : modelCart.stateTransaction ==
+                                          ResultState.loading
                                       ? null
                                       : () {
                                           checkout();
                                         },
                               icon: Icon(
                                 Icons.shopping_cart_outlined,
-                                color: modelCart.stateTransaction == ResultState.loading
+                                color: modelCart.stateTransaction ==
+                                        ResultState.loading
                                     ? Colors.transparent
                                     : textColorWhite,
                               ),
-                              label: modelCart.stateTransaction == ResultState.loading
+                              label: modelCart.stateTransaction ==
+                                      ResultState.loading
                                   ? const CircularProgressIndicator()
                                   : Text(
                                       "Checkout",
                                       style: Theme.of(context)
                                           .textTheme
                                           .subtitle1!
-                                          .copyWith(color: textColorWhite, fontSize: 17.0),
+                                          .copyWith(
+                                              color: textColorWhite,
+                                              fontSize: 17.0),
                                     ),
                             ),
                           ],

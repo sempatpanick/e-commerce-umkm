@@ -40,8 +40,10 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
 
   void _updateOrder() async {
     final NavigatorState navigator = Navigator.of(context);
-    final HomeViewModel homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
-    final ProductViewModel productViewModel = Provider.of<ProductViewModel>(context, listen: false);
+    final HomeViewModel homeViewModel =
+        Provider.of<HomeViewModel>(context, listen: false);
+    final ProductViewModel productViewModel =
+        Provider.of<ProductViewModel>(context, listen: false);
     final OnlineOrderViewModel onlineOrderViewModel =
         Provider.of<OnlineOrderViewModel>(context, listen: false);
     final HistoryTransactionViewModel historyTransactionViewModel =
@@ -89,11 +91,13 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
       listItem.add(
         DataRow(
           cells: [
-            DataCell(Align(alignment: Alignment.centerLeft, child: Text("$iteration."))),
+            DataCell(Align(
+                alignment: Alignment.centerLeft, child: Text("$iteration."))),
             DataCell(Text(element.name)),
             DataCell(Text("x${element.amount}")),
             DataCell(Align(
-                alignment: Alignment.centerLeft, child: Text(GetFormatted.number(element.price)))),
+                alignment: Alignment.centerLeft,
+                child: Text(GetFormatted.number(element.price)))),
           ],
         ),
       );
@@ -103,7 +107,8 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8.0),
-      decoration: BoxDecoration(color: textColorWhite, borderRadius: BorderRadius.circular(25.0)),
+      decoration: BoxDecoration(
+          color: textColorWhite, borderRadius: BorderRadius.circular(25.0)),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -161,20 +166,24 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                           ),
                     ),
                     OutlinedButton(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, MapLocationScreen.routeName, arguments: {
-                              "name": widget.onlineOrder.buyer.address.name,
-                              "latitude": widget.onlineOrder.buyer.address.latitude,
-                              "longitude": widget.onlineOrder.buyer.address.longitude
-                            }),
-                        style:
-                            OutlinedButton.styleFrom(side: const BorderSide(color: primaryColor)),
+                        onPressed: () => Navigator.pushNamed(
+                                context, MapLocationScreen.routeName,
+                                arguments: {
+                                  "name": widget.onlineOrder.buyer.address.name,
+                                  "latitude":
+                                      widget.onlineOrder.buyer.address.latitude,
+                                  "longitude":
+                                      widget.onlineOrder.buyer.address.longitude
+                                }),
+                        style: OutlinedButton.styleFrom(
+                            side: const BorderSide(color: primaryColor)),
                         child: Text(
                           "Buka Map",
-                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                color: primaryColor,
-                                fontSize: 12.0,
-                              ),
+                          style:
+                              Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    color: primaryColor,
+                                    fontSize: 12.0,
+                                  ),
                         ))
                   ],
                 ),
@@ -225,7 +234,8 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
               Expanded(
                 flex: 0,
                 child: Text(
-                  GetFormatted.number(widget.onlineOrder.bill - widget.onlineOrder.shippingCost),
+                  GetFormatted.number(widget.onlineOrder.bill -
+                      widget.onlineOrder.shippingCost),
                   style: Theme.of(context).textTheme.subtitle1!.copyWith(
                         color: colorBlack,
                         fontSize: 11.0,
@@ -277,7 +287,8 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
               Expanded(
                 flex: 0,
                 child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 4.0),
                   decoration: BoxDecoration(
                       color: widget.onlineOrder.status == 0
                           ? colorDashboardPurple
@@ -355,13 +366,17 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                                 children: [
                                   Text(
                                     "Status",
-                                    style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .subtitle1!
+                                        .copyWith(
                                           color: colorBlack,
                                           fontSize: 12.0,
                                         ),
                                   ),
                                   RadioListTile(
-                                    visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                    visualDensity: const VisualDensity(
+                                        horizontal: 0, vertical: -4),
                                     contentPadding: EdgeInsets.zero,
                                     groupValue: _groupValue,
                                     value: 1,
@@ -370,17 +385,22 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                                         _groupValue = value as int;
                                       });
                                     },
-                                    controlAffinity: ListTileControlAffinity.leading,
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
                                     title: Text(
                                       "Dalam Pengiriman",
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
                                             color: colorBlack,
                                             fontSize: 12.0,
                                           ),
                                     ),
                                   ),
                                   RadioListTile(
-                                    visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                    visualDensity: const VisualDensity(
+                                        horizontal: 0, vertical: -4),
                                     contentPadding: EdgeInsets.zero,
                                     groupValue: _groupValue,
                                     value: 2,
@@ -389,17 +409,22 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                                         _groupValue = value as int;
                                       });
                                     },
-                                    controlAffinity: ListTileControlAffinity.leading,
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
                                     title: Text(
                                       "Tolak Pengiriman",
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
                                             color: colorBlack,
                                             fontSize: 12.0,
                                           ),
                                     ),
                                   ),
                                   RadioListTile(
-                                    visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                    visualDensity: const VisualDensity(
+                                        horizontal: 0, vertical: -4),
                                     contentPadding: EdgeInsets.zero,
                                     groupValue: _groupValue,
                                     value: 3,
@@ -408,10 +433,14 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                                         _groupValue = value as int;
                                       });
                                     },
-                                    controlAffinity: ListTileControlAffinity.leading,
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
                                     title: Text(
                                       "Telah Dikirim",
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
                                             color: colorBlack,
                                             fontSize: 12.0,
                                           ),
@@ -420,7 +449,10 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                                   if (_groupValue == 3)
                                     Text(
                                       "Pembayaran",
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
                                             color: colorBlack,
                                             fontSize: 12.0,
                                           ),
@@ -429,13 +461,14 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                                     TextFormField(
                                       controller: _textPaidController,
                                       decoration: const InputDecoration(
-                                          contentPadding:
-                                              EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                                          contentPadding: EdgeInsets.symmetric(
+                                              vertical: 0, horizontal: 16),
                                           labelText: "Money",
                                           border: OutlineInputBorder()),
                                       keyboardType: TextInputType.number,
                                       validator: (value) {
-                                        if (int.parse(value!) < widget.onlineOrder.bill) {
+                                        if (int.parse(value!) <
+                                            widget.onlineOrder.bill) {
                                           return "money is not enough";
                                         } else {
                                           return null;
@@ -448,14 +481,17 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                                 ],
                               ),
                             ),
-                            contentPadding:
-                                const EdgeInsets.only(top: 20.0, right: 20.0, left: 20.0),
+                            contentPadding: const EdgeInsets.only(
+                                top: 20.0, right: 20.0, left: 20.0),
                             actions: [
                               TextButton(
                                 onPressed: () => Navigator.pop(context),
                                 child: Text(
                                   "Cancel",
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
                                         color: colorRed,
                                         fontSize: 12.0,
                                       ),
@@ -465,7 +501,10 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                                 onPressed: () => _updateOrder(),
                                 child: Text(
                                   "Update",
-                                  style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .subtitle1!
+                                      .copyWith(
                                         color: primaryColor,
                                         fontSize: 12.0,
                                       ),
@@ -477,9 +516,9 @@ class _CustomItemOnlineOrderState extends State<CustomItemOnlineOrder> {
                       );
                     },
               style: ElevatedButton.styleFrom(
-                primary: primaryColor,
                 side: const BorderSide(color: primaryColor),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
               ),
               child: Text(
                 "Proses",

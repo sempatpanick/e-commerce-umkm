@@ -30,20 +30,23 @@ class _AuthScreenState extends State<AuthScreen> {
 
   void auth() async {
     if (_formKey.currentState!.validate()) {
-      if (_emailTextController.text.isEmpty || _passwordTextController.text.isEmpty) {
+      if (_emailTextController.text.isEmpty ||
+          _passwordTextController.text.isEmpty) {
         CustomNotificationSnackbar(
             context: context, message: "Username or password can't be empty");
       } else if (isEmail(_emailTextController.text)) {
         final navigator = Navigator.of(context);
-        final AuthViewModel authViewModel = Provider.of<AuthViewModel>(context, listen: false);
+        final AuthViewModel authViewModel =
+            Provider.of<AuthViewModel>(context, listen: false);
         if (widget.isLogin) {
-          final result = await authViewModel.login(
-              _emailTextController.text, Encryption.generateMd5(_passwordTextController.text));
+          final result = await authViewModel.login(_emailTextController.text,
+              Encryption.generateMd5(_passwordTextController.text));
 
           if (result.status) {
             CustomNotificationSnackbar(
                 context: context,
-                message: "Selamat datang ${result.user!.nama ?? result.user!.email}");
+                message:
+                    "Selamat datang ${result.user!.nama ?? result.user!.email}");
             if (result.user!.role == "Seller") {
               navigator.pushReplacementNamed(MainScreen.routeName);
             } else {
@@ -56,20 +59,25 @@ class _AuthScreenState extends State<AuthScreen> {
                   message: result.message,
                   actionLabel: "Resend Email",
                   action: () async {
-                    final resultEmail = await authViewModel.resendEmail(result.user!.email);
-                    CustomNotificationSnackbar(context: context, message: resultEmail.message);
+                    final resultEmail =
+                        await authViewModel.resendEmail(result.user!.email);
+                    CustomNotificationSnackbar(
+                        context: context, message: resultEmail.message);
                   });
             } else {
-              CustomNotificationSnackbar(context: context, message: result.message);
+              CustomNotificationSnackbar(
+                  context: context, message: result.message);
             }
           }
         } else {
           if (_roleButtonController.selectedIndex == null) {
             CustomNotificationSnackbar(
-                context: context, message: "Anda harus memilih role terlebih dahulu");
+                context: context,
+                message: "Anda harus memilih role terlebih dahulu");
           } else {
             final result = await authViewModel.register(
-                _emailTextController.text, Encryption.generateMd5(_passwordTextController.text));
+                _emailTextController.text,
+                Encryption.generateMd5(_passwordTextController.text));
 
             if (result.status) {
               CustomNotificationSnackbar(
@@ -77,7 +85,8 @@ class _AuthScreenState extends State<AuthScreen> {
                   message:
                       "Akun telah berhasil dibuat, silahkan periksa email/folder spam anda untuk aktivasi");
             } else {
-              CustomNotificationSnackbar(context: context, message: result.message);
+              CustomNotificationSnackbar(
+                  context: context, message: result.message);
             }
           }
         }
@@ -104,7 +113,8 @@ class _AuthScreenState extends State<AuthScreen> {
               ? const Center(child: CircularProgressIndicator())
               : SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 45.0, horizontal: 43.0),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 45.0, horizontal: 43.0),
                     child: Form(
                       key: _formKey,
                       child: Column(
@@ -113,18 +123,22 @@ class _AuthScreenState extends State<AuthScreen> {
                           Center(
                             child: widget.isLogin
                                 ? Image.asset("assets/images/img_door_user.png")
-                                : Image.asset("assets/images/img_phone_user.png"),
+                                : Image.asset(
+                                    "assets/images/img_phone_user.png"),
                           ),
                           const SizedBox(
                             height: 20,
                           ),
                           Text(
                             widget.isLogin ? "Login" : "Register",
-                            style: Theme.of(context).textTheme.headline5!.copyWith(
-                                color: primaryColor,
-                                fontSize: 24.0,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 0.75),
+                            style: Theme.of(context)
+                                .textTheme
+                                .headline5!
+                                .copyWith(
+                                    color: primaryColor,
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 0.75),
                           ),
                           const SizedBox(
                             height: 22,
@@ -153,7 +167,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                 Icons.email_outlined,
                                 color: textFieldColorGrey,
                               ),
-                              border: OutlineInputBorder(borderRadius: BorderRadius.circular(30)),
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30)),
                             ),
                           ),
                           const SizedBox(
@@ -220,10 +235,13 @@ class _AuthScreenState extends State<AuthScreen> {
                                       onSelected: (val, index, selected) =>
                                           model.setRole(val.toString()),
                                       options: GroupButtonOptions(
-                                          selectedBorderColor: Colors.transparent,
-                                          unselectedBorderColor: colorDashboardBlue,
+                                          selectedBorderColor:
+                                              Colors.transparent,
+                                          unselectedBorderColor:
+                                              colorDashboardBlue,
                                           textPadding: const EdgeInsets.all(10),
-                                          borderRadius: BorderRadius.circular(25.0)),
+                                          borderRadius:
+                                              BorderRadius.circular(25.0)),
                                       buttons: const [
                                         "Seller",
                                         "Buyer",
@@ -248,27 +266,31 @@ class _AuthScreenState extends State<AuthScreen> {
                                     } else {
                                       CustomNotificationSnackbar(
                                           context: context,
-                                          message: "Anda harus memilih role terlebih dahulu");
+                                          message:
+                                              "Anda harus memilih role terlebih dahulu");
                                     }
                                   } else {
                                     CustomNotificationSnackbar(
                                         context: context,
-                                        message: "Anda harus memilih role terlebih dahulu");
+                                        message:
+                                            "Anda harus memilih role terlebih dahulu");
                                   }
                                 }
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: primaryColor,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18.0),
                                 ),
                               ),
                               child: Text(
                                 widget.isLogin ? "Login" : "Register",
-                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: textColorWhite,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .copyWith(
+                                        color: textColorWhite,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -279,7 +301,8 @@ class _AuthScreenState extends State<AuthScreen> {
                             children: [
                               Expanded(
                                 child: Container(
-                                    margin: const EdgeInsets.only(left: 10.0, right: 20.0),
+                                    margin: const EdgeInsets.only(
+                                        left: 10.0, right: 20.0),
                                     child: const Divider(
                                       color: primaryColor,
                                       height: 1,
@@ -287,12 +310,15 @@ class _AuthScreenState extends State<AuthScreen> {
                               ),
                               Text(
                                 "or",
-                                style:
-                                    Theme.of(context).textTheme.subtitle1!.copyWith(fontSize: 12.0),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .copyWith(fontSize: 12.0),
                               ),
                               Expanded(
                                 child: Container(
-                                  margin: const EdgeInsets.only(left: 20.0, right: 10.0),
+                                  margin: const EdgeInsets.only(
+                                      left: 20.0, right: 10.0),
                                   child: const Divider(
                                     color: primaryColor,
                                     height: 1,
@@ -310,22 +336,27 @@ class _AuthScreenState extends State<AuthScreen> {
                             child: ElevatedButton(
                               onPressed: () {
                                 widget.isLogin
-                                    ? Navigator.pushNamed(context, AuthScreen.routeName,
+                                    ? Navigator.pushNamed(
+                                        context, AuthScreen.routeName,
                                         arguments: false)
                                     : Navigator.pop(context);
                               },
                               style: ElevatedButton.styleFrom(
-                                primary: textColorWhite,
+                                backgroundColor: textColorWhite,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
-                                    side: const BorderSide(color: primaryColor)),
+                                    side:
+                                        const BorderSide(color: primaryColor)),
                               ),
                               child: Text(
                                 widget.isLogin ? "Register" : "Login",
-                                style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                    color: primaryColor,
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .subtitle1!
+                                    .copyWith(
+                                        color: primaryColor,
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),

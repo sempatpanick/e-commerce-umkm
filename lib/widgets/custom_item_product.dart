@@ -16,6 +16,7 @@ class CustomItemProduct extends StatefulWidget {
   final int index;
   final Products product;
   final ProductViewModel productViewModel;
+
   const CustomItemProduct(
       {Key? key, required this.index, required this.product, required this.productViewModel})
       : super(key: key);
@@ -157,7 +158,6 @@ class _CustomItemProductState extends State<CustomItemProduct> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.all(0),
-                            primary: primaryColor,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),
@@ -184,7 +184,7 @@ class _CustomItemProductState extends State<CustomItemProduct> {
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             padding: const EdgeInsets.all(0),
-                            primary: colorRed,
+                            backgroundColor: colorRed,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.0),
                             ),

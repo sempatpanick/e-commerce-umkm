@@ -16,7 +16,8 @@ import '../../../widgets/custom_image_dialog.dart';
 class DetailStoreBuyerScreen extends StatefulWidget {
   static const String routeName = '/detail_store_buyer';
   final Store store;
-  const DetailStoreBuyerScreen({Key? key, required this.store}) : super(key: key);
+  const DetailStoreBuyerScreen({Key? key, required this.store})
+      : super(key: key);
 
   @override
   State<DetailStoreBuyerScreen> createState() => _DetailStoreBuyerScreenState();
@@ -57,8 +58,8 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                   pinned: true,
                   snap: true,
                   expandedHeight: 200,
-                  flexibleSpace:
-                      Consumer<DetailStoreBuyerViewModel>(builder: (context, model, child) {
+                  flexibleSpace: Consumer<DetailStoreBuyerViewModel>(
+                      builder: (context, model, child) {
                     return LayoutBuilder(builder: (context, constraints) {
                       if (constraints.biggest.height <= 60) {
                         model.setIsExpandableAppBar(false);
@@ -70,10 +71,13 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                           filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
                           child: Text(
                             widget.store.name!,
-                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                  color: model.isExpandableAppBar ? Colors.white : colorMenu,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            style:
+                                Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      color: model.isExpandableAppBar
+                                          ? Colors.white
+                                          : colorMenu,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                           ),
                         ),
                         background: Image.network(
@@ -113,7 +117,8 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                 const Divider(
                   color: primaryColor,
                 ),
-                Consumer<DetailStoreBuyerViewModel>(builder: (context, model, child) {
+                Consumer<DetailStoreBuyerViewModel>(
+                    builder: (context, model, child) {
                   if (model.stateProduct == ResultState.none) {
                     return const SizedBox();
                   }
@@ -158,22 +163,27 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                                       onTap: () => showDialog(
                                           context: context,
                                           builder: (context) =>
-                                              CustomImageDialog(image: product.image!)),
+                                              CustomImageDialog(
+                                                  image: product.image!)),
                                       child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(20), // Image border
+                                        borderRadius: BorderRadius.circular(
+                                            20), // Image border
                                         child: SizedBox.fromSize(
-                                          size: const Size.fromRadius(35), // Image radius
+                                          size: const Size.fromRadius(
+                                              35), // Image radius
                                           child: Image.network(
                                             "https://e-warung.my.id/assets/users/${product.image!}",
                                             fit: BoxFit.fill,
-                                            errorBuilder: (BuildContext context, Object exception,
+                                            errorBuilder: (BuildContext context,
+                                                Object exception,
                                                 StackTrace? stackTrace) {
                                               return Container(
                                                 width: 35,
                                                 height: 35,
-                                                padding: const EdgeInsets.all(16.0),
-                                                decoration:
-                                                    const BoxDecoration(color: primaryColor),
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                decoration: const BoxDecoration(
+                                                    color: primaryColor),
                                                 child: const Center(
                                                   child: Icon(
                                                     Icons.broken_image,
@@ -183,16 +193,24 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                                                 ),
                                               );
                                             },
-                                            loadingBuilder: (BuildContext context, Widget child,
-                                                ImageChunkEvent? loadingProgress) {
+                                            loadingBuilder:
+                                                (BuildContext context,
+                                                    Widget child,
+                                                    ImageChunkEvent?
+                                                        loadingProgress) {
                                               if (loadingProgress == null) {
                                                 return child;
                                               }
                                               return Center(
-                                                child: CircularProgressIndicator(
-                                                  value: loadingProgress.expectedTotalBytes != null
-                                                      ? loadingProgress.cumulativeBytesLoaded /
-                                                          loadingProgress.expectedTotalBytes!
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  value: loadingProgress
+                                                              .expectedTotalBytes !=
+                                                          null
+                                                      ? loadingProgress
+                                                              .cumulativeBytesLoaded /
+                                                          loadingProgress
+                                                              .expectedTotalBytes!
                                                       : null,
                                                 ),
                                               );
@@ -204,7 +222,8 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                                   : Container(
                                       width: 35,
                                       height: 35,
-                                      decoration: const BoxDecoration(color: primaryColor),
+                                      decoration: const BoxDecoration(
+                                          color: primaryColor),
                                       child: const Center(
                                         child: Icon(
                                           Icons.image_not_supported_outlined,
@@ -222,17 +241,22 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                                   children: [
                                     Text(
                                       product.name,
-                                      style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                          fontSize: 13,
-                                          color: colorBlack,
-                                          fontWeight: FontWeight.bold),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .subtitle1!
+                                          .copyWith(
+                                              fontSize: 13,
+                                              color: colorBlack,
+                                              fontWeight: FontWeight.bold),
                                     ),
                                     const SizedBox(
                                       height: 4,
                                     ),
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: product.description != null &&
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment: product.description !=
+                                                  null &&
                                               product.description!.isNotEmpty
                                           ? MainAxisAlignment.spaceBetween
                                           : MainAxisAlignment.end,
@@ -244,16 +268,21 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                                               product.description!,
                                               maxLines: 4,
                                               overflow: TextOverflow.ellipsis,
-                                              style:
-                                                  Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                        fontSize: 11,
-                                                        color: colorGreyBlack,
-                                                      ),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .subtitle1!
+                                                  .copyWith(
+                                                    fontSize: 11,
+                                                    color: colorGreyBlack,
+                                                  ),
                                             ),
                                           ),
                                         Text(
                                           "Sisa: ${GetFormatted.number(product.stock)}",
-                                          style: Theme.of(context).textTheme.subtitle1!.copyWith(
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .subtitle1!
+                                              .copyWith(
                                                 fontSize: 11,
                                                 color: colorGreyBlack,
                                               ),
@@ -268,33 +297,43 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                                         Expanded(
                                           child: Text(
                                             GetFormatted.number(product.price),
-                                            style: Theme.of(context).textTheme.subtitle1!.copyWith(
-                                                fontSize: 11,
-                                                color: colorBlack,
-                                                fontWeight: FontWeight.bold),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .subtitle1!
+                                                .copyWith(
+                                                    fontSize: 11,
+                                                    color: colorBlack,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                           ),
                                         ),
                                         OutlinedButton(
                                             onPressed: () {
-                                              final CartBuyerViewModel cartBuyerViewModel =
-                                                  Provider.of<CartBuyerViewModel>(context,
-                                                      listen: false);
+                                              final CartBuyerViewModel
+                                                  cartBuyerViewModel = Provider
+                                                      .of<CartBuyerViewModel>(
+                                                          context,
+                                                          listen: false);
                                               final productCart = ProductCart(
                                                   idProduct: product.idProduct,
                                                   price: product.price,
                                                   amount: 1,
                                                   description: "");
-                                              cartBuyerViewModel.addProductToCart(
-                                                  widget.store.id, productCart);
+                                              cartBuyerViewModel
+                                                  .addProductToCart(
+                                                      widget.store.id,
+                                                      productCart);
                                               CustomNotificationSnackbar(
                                                   context: context,
-                                                  message: "Produk telah ditambahkan ke keranjang");
+                                                  message:
+                                                      "Produk telah ditambahkan ke keranjang");
                                             },
                                             style: OutlinedButton.styleFrom(
-                                              primary: primaryColor,
-                                              side: const BorderSide(color: primaryColor),
+                                              side: const BorderSide(
+                                                  color: primaryColor),
                                               shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(18.0),
+                                                borderRadius:
+                                                    BorderRadius.circular(18.0),
                                               ),
                                             ),
                                             child: Text(
@@ -305,7 +344,8 @@ class _DetailStoreBuyerScreenState extends State<DetailStoreBuyerScreen> {
                                                   .copyWith(
                                                       fontSize: 11,
                                                       color: primaryColor,
-                                                      fontWeight: FontWeight.bold),
+                                                      fontWeight:
+                                                          FontWeight.bold),
                                             ))
                                       ],
                                     ),

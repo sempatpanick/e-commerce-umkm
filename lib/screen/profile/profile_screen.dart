@@ -46,7 +46,8 @@ class ProfileScreen extends StatelessWidget {
                               ? Image.network(
                                   "https://e-warung.my.id/assets/users/${model.userLogin.id}/${model.userLogin.avatar ?? ""}",
                                   fit: BoxFit.fill,
-                                  errorBuilder: (BuildContext context, Object exception,
+                                  errorBuilder: (BuildContext context,
+                                      Object exception,
                                       StackTrace? stackTrace) {
                                     return const Icon(
                                       Icons.broken_image,
@@ -54,16 +55,21 @@ class ProfileScreen extends StatelessWidget {
                                       color: textColorWhite,
                                     );
                                   },
-                                  loadingBuilder: (BuildContext context, Widget child,
+                                  loadingBuilder: (BuildContext context,
+                                      Widget child,
                                       ImageChunkEvent? loadingProgress) {
                                     if (loadingProgress == null) {
                                       return child;
                                     }
                                     return Center(
                                       child: CircularProgressIndicator(
-                                        value: loadingProgress.expectedTotalBytes != null
-                                            ? loadingProgress.cumulativeBytesLoaded /
-                                                loadingProgress.expectedTotalBytes!
+                                        value: loadingProgress
+                                                    .expectedTotalBytes !=
+                                                null
+                                            ? loadingProgress
+                                                    .cumulativeBytesLoaded /
+                                                loadingProgress
+                                                    .expectedTotalBytes!
                                             : null,
                                       ),
                                     );
@@ -89,7 +95,8 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, ProfileUpdateScreen.routeName);
+                              Navigator.pushNamed(
+                                  context, ProfileUpdateScreen.routeName);
                             },
                             child: const Padding(
                               padding: EdgeInsets.all(8.0),
@@ -103,13 +110,15 @@ class ProfileScreen extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        color: textColorWhite, borderRadius: BorderRadius.circular(20.0)),
+                        color: textColorWhite,
+                        borderRadius: BorderRadius.circular(20.0)),
                     child: ListView(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       children: [
                         ListTile(
-                          onTap: () => Navigator.pushNamed(context, ChangePasswordScreen.routeName),
+                          onTap: () => Navigator.pushNamed(
+                              context, ChangePasswordScreen.routeName),
                           leading: const Icon(Icons.key),
                           title: Text(
                             "Change Password",
@@ -130,17 +139,20 @@ class ProfileScreen extends StatelessWidget {
                     height: 40,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: primaryColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(18.0),
                         ),
                       ),
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, AuthScreen.routeName,
+                        Navigator.pushReplacementNamed(
+                            context, AuthScreen.routeName,
                             arguments: true);
-                        Provider.of<CartViewModel>(context, listen: false).clearAll();
-                        Provider.of<MainViewModel>(context, listen: false).setIndexBottomNav(0);
-                        Provider.of<HomeViewModel>(context, listen: false).clear();
+                        Provider.of<CartViewModel>(context, listen: false)
+                            .clearAll();
+                        Provider.of<MainViewModel>(context, listen: false)
+                            .setIndexBottomNav(0);
+                        Provider.of<HomeViewModel>(context, listen: false)
+                            .clear();
                         Provider.of<ProductViewModel>(context, listen: false)
                             .setIsFormInputProduct(false);
                         model.removeUserLogin();
